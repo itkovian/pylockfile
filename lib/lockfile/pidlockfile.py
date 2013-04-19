@@ -12,15 +12,13 @@
 """ Lockfile behaviour implemented via Unix PID files.
     """
 
-from __future__ import absolute_import
-
 import os
 import sys
 import errno
 import time
 
-from . import (LockBase, AlreadyLocked, LockFailed, NotLocked, NotMyLock,
-               LockTimeout)
+from lockfile import (LockBase, AlreadyLocked, LockFailed, NotLocked,
+                      NotMyLock, LockTimeout)
 
 
 class PIDLockFile(LockBase):

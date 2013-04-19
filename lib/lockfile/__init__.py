@@ -23,16 +23,14 @@ True
 >>> lock = LockFile('somefile')
 >>> print lock.is_locked()
 False
->>> with lock:
-...    print lock.is_locked()
-True
->>> print lock.is_locked()
-False
 
 >>> lock = LockFile('somefile')
 >>> # It is okay to lock twice from the same thread...
->>> with lock:
-...     lock.acquire()
+>>> lock.acquire()
+>>> try:
+...   lock.acquire()
+... finally:
+...   lock.release()
 ...
 >>> # Though no counter is kept, so you can't unlock multiple times...
 >>> print lock.is_locked()

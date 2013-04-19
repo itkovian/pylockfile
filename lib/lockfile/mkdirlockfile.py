@@ -1,12 +1,10 @@
-from __future__ import absolute_import, division
-
 import time
 import os
 import sys
 import errno
 
-from . import (LockBase, LockFailed, NotLocked, NotMyLock, LockTimeout,
-               AlreadyLocked)
+from lockfile import (LockBase, LockFailed, NotLocked, NotMyLock, LockTimeout,
+                      AlreadyLocked)
 
 class MkdirLockFile(LockBase):
     """Lock file by creating a directory."""
