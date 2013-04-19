@@ -12,7 +12,7 @@ shared_setup.SHARED_TARGET.update({
 
 PACKAGE = {
     'name':'lockfile',
-    'author':'Skip Montanaro',
+    'author':['Skip Montanaro'],
     'author_email':'skip@pobox.com',
     'version':V,
     'description':"Platform-independent file locking module",
