@@ -20,7 +20,7 @@ import time
 from lockfile import (LockBase, AlreadyLocked, LockFailed, NotLocked,
                       NotMyLock, LockTimeout)
 
-
+
 class PIDLockFile(LockBase):
     """ Lockfile implemented as a Unix PID file.
 
@@ -76,7 +76,7 @@ class PIDLockFile(LockBase):
         while True:
             try:
                 write_pid_to_pidfile(self.path)
-            except OSError as exc:
+            except OSError, exc:
                 if exc.errno == errno.EEXIST:
                     # The lock creation failed.  Maybe sleep a bit.
                     if timeout is not None and time.time() > end_time:
@@ -130,10 +130,10 @@ def read_pid_from_pidfile(pidfile_path):
         pass
     else:
         # According to the FHS 2.3 section on PID files in /var/run:
-        # 
+        #
         #   The file must consist of the process identifier in
         #   ASCII-encoded decimal, followed by a newline character.
-        # 
+        #
         #   Programs that read PID files should be somewhat flexible
         #   in what they accept; i.e., they should ignore extra
         #   whitespace, leading zeroes, absence of the trailing
@@ -157,7 +157,7 @@ def write_pid_to_pidfile(pidfile_path):
 
         """
     open_flags = (os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-    open_mode = 0o644
+    open_mode = 0644
     pidfile_fd = os.open(pidfile_path, open_flags, open_mode)
     pidfile = os.fdopen(pidfile_fd, 'w')
 
@@ -184,7 +184,7 @@ def remove_existing_pidfile(pidfile_path):
         """
     try:
         os.remove(pidfile_path)
-    except OSError as exc:
+    except OSError, exc:
         if exc.errno == errno.ENOENT:
             pass
         else:

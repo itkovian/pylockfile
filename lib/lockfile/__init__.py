@@ -47,7 +47,6 @@ Exceptions:
             NotMyLock - File was locked but not by the current thread/process
 """
 
-from __future__ import absolute_import
 
 import sys
 import socket
@@ -256,7 +255,7 @@ def LinkFileLock(*args, **kwds):
     Do not use in new code.  Instead, import LinkLockFile from the
     lockfile.linklockfile module.
     """
-    from . import linklockfile
+    from lockfile import linklockfile
     return _fl_helper(linklockfile.LinkLockFile, "lockfile.linklockfile",
                       *args, **kwds)
 
@@ -266,7 +265,7 @@ def MkdirFileLock(*args, **kwds):
     Do not use in new code.  Instead, import MkdirLockFile from the
     lockfile.mkdirlockfile module.
     """
-    from . import mkdirlockfile
+    from lockfile import mkdirlockfile
     return _fl_helper(mkdirlockfile.MkdirLockFile, "lockfile.mkdirlockfile",
                       *args, **kwds)
 
@@ -276,7 +275,7 @@ def SQLiteFileLock(*args, **kwds):
     Do not use in new code.  Instead, import SQLiteLockFile from the
     lockfile.mkdirlockfile module.
     """
-    from . import sqlitelockfile
+    from lockfile import sqlitelockfile
     return _fl_helper(sqlitelockfile.SQLiteLockFile, "lockfile.sqlitelockfile",
                       *args, **kwds)
 
@@ -305,10 +304,10 @@ def locked(path, timeout=None):
     return decor
 
 if hasattr(os, "link"):
-    from . import linklockfile as _llf
+    import linklockfile as _llf
     LockFile = _llf.LinkLockFile
 else:
-    from . import mkdirlockfile as _mlf
+    import mkdirlockfile as _mlf
     LockFile = _mlf.MkdirLockFile
 
 FileLock = LockFile

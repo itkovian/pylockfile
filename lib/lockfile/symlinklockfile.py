@@ -1,9 +1,8 @@
-from __future__ import absolute_import
 
 import time
 import os
 
-from . import (LockBase, LockFailed, NotLocked, NotMyLock, LockTimeout,
+from lockfile import (LockBase, LockFailed, NotLocked, NotMyLock, LockTimeout,
                AlreadyLocked)
 
 class SymlinkLockFile(LockBase):
@@ -45,7 +44,10 @@ class SymlinkLockFile(LockBase):
                         else:
                             raise AlreadyLocked("%s is already locked" %
                                                 self.path)
-                    time.sleep(timeout/10 if timeout is not None else 0.1)
+                    if not timeout is None:
+                        time.sleep(timeout/10)
+                    else:
+                        time.sleep(0.1)
             else:
                 # Link creation succeeded.  We're good to go.
                 return
