@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-V = "0.9.1"
+V = "0.9.1.1"
 
 import vsc.install.shared_setup as shared_setup
 
