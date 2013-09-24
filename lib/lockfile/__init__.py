@@ -55,7 +55,10 @@ import threading
 import time
 import urllib
 import warnings
-import functools
+try:
+    import functools
+except ImportError:
+    import functools_backport_24 as functools
 
 # Work with PEP8 and non-PEP8 versions of threading module.
 if not hasattr(threading, "current_thread"):
